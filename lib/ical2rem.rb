@@ -168,7 +168,7 @@ class Ical2Rem
     cal.events.each do |event|
       # XXX Object conversion is expensive, is there no better way?
       vstart = event.dtstart.to_time.getlocal
-      vend = event.dtend.to_time.getlocal
+      vend = event.dtend.to_time.getlocal if event.dtend
       duration = duration(event)
 
       # The starting date, e.g.
@@ -213,7 +213,7 @@ class Ical2Rem
       if is_datetime
         print " %3"
       end
-      print " %\"#{event.summary}" 
+      print " %\"#{event.summary}"
 
       # If a location for the event is given, we add it to the message.
       print " at #{event.location}" if event.location
